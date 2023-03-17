@@ -1,0 +1,47 @@
+
+
+
+  <div class="content">
+  
+
+  <app-filter [categoryFk] = "categoryFk" [departmentFk] = "department_fk" ></app-filter>
+
+
+
+  <div  class="items"> 
+
+    <div *ngIf="(product$ | async) as productPage">
+
+    <div *ngIf="productPage.products.length === 0"> 
+        <p>There are no items in this category</p>
+    </div>  
+
+    <div  *ngFor="let item of productPage.products">
+      <div class="row display">
+        
+        <img (click)="openProduct(item.ProductPk)" class="img-responsive img-thumbnail col-lg-4 imagediv" src="{{item.slika}}">
+     
+
+        <div class="col-lg-8 data" >        
+          <p class="text">{{item.ProductName}} </p> 
+          <br> 
+            <div class="text_details">
+              <p>{{item.ProductDetails}} </p> 
+              <p> <mat-icon class="star" *ngFor="let star of item.RatingStar let i = index"> {{star}} </mat-icon> </p>
+              <b>{{item.ProductPrice | currency:'EUR':true}}</b>
+              <div *ngIf="user && user.isAdmin">
+                 <p style="color: red;"><b>Score: {{item.Score}}</b></p>
+              </div>
+             
+          </div>
+       </div>
+    
+    </div>
+    
+  </div> 
+ </div>
+
+  
+  
+  </div>
+      

@@ -1,0 +1,60 @@
+.wrapper{
+    text-align: center;
+    align-items: center;
+    height: 100vh;
+}
+button{
+    background: skyblue;
+    color: white;
+    padding: 10px 15px;
+    font-size: 15px;
+    width: 150px;
+    text-align: center;
+    margin-left: 5px;
+
+}
+.block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+    height: 520px;
+    width: 450px;
+    padding: 40px;
+    border: 4px solid gray;
+   
+}
+button:disabled{
+    background: gray;
+    color:white;
+}
+
+
+
+
+
+
+.block form {
+    
+    width: 90%;
+    margin: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+
+    
+  }
+
+
+.block form .inp{
+    padding: 10px 10px;
+    margin: 10px;
+    width: 100%;
+   
+  }
+
+  .block form .btns{
+    display: flex;
+}

@@ -1,0 +1,336 @@
+
+    
+    
+    
+
+/*
+    
+ngb-carousel .wrapper {
+
+    position: relative;
+  
+  /*   height: 55%;
+  
+   padding-top: 25%;  
+  
+  }
+  
+ngb-carousel .wrapper>img {
+  
+    position: absolute;
+    width: 100%;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  
+  }
+
+ngb-carousel .carousel-control-next
+  {
+    background-color: black;
+  }
+
+
+  
+
+  .MainContent
+{
+
+ 
+    
+    
+   
+}
+*/
+.row1
+{
+  position: relative;
+}
+
+ .row1 ngb-carousel .wrapper {
+
+   
+  
+    height: 50%;
+  
+    padding-top: 50%; /* Keep ratio for 900x500 images */
+  
+  }
+
+  
+  
+  .row1 ngb-carousel .wrapper>img {
+  
+    position: absolute;
+    width: 100%;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+  
+  }
+
+ 
+ 
+.main
+{
+  position: absolute;
+  top: 50%;
+  width: 100%; height: 70%; display: flex; justify-content: center; 
+}
+
+.template
+{   
+ 
+  margin: 1%;
+  padding: 2%;
+  width: 25%;
+  background-color: gray;
+ 
+}
+.grid
+{
+ margin-bottom: 5%;
+ width: 100%;
+ height: 75%;
+
+ 
+
+
+
+}
+
+.image  :hover
+{
+  opacity: 1; 
+}
+
+mat-grid-tile .hover-overlay
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(255,255, 255,0.5);
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+
+.hover_text
+{
+  font-size: 20px;
+  font-weight: bold;
+}
+.mat-grid-tile-content > img
+{
+  height: 100%; width: 100%; object-fit: 'contain';
+
+
+}
+
+
+.main .template .text
+{
+  color: rgb(255, 255, 255);
+ font-size: 30px;
+ font-weight: bold;
+
+}
+.main .template .prediction
+{
+  color: rgb(255, 255, 255);
+ font-size: 30px;
+ font-weight: bold;
+ height: 20% auto;
+
+}
+
+
+
+.ShopNow
+{
+ 
+  height: 10%;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  justify-content : center;
+  display: flex;
+  cursor: pointer;
+}
+
+.Score
+{
+  font-size: 25px;
+  color: white;
+  font-weight: 1000;
+}
+.ScoreBlack
+{
+  font-size: 25px;
+  color: black;
+  font-weight: 1000;
+}
+
+.row2
+{ 
+  padding-top: 10%;
+  
+    display: flex; justify-content: center; 
+   
+
+}
+.row2 .template
+{
+ height: 50%;
+ overflow: hidden;
+}
+
+
+
+
+.row2 .template .grid
+{
+   
+  margin-bottom: 5%;
+ 
+  background-color: white;
+  width: 100%;
+  height: 300px;
+  
+
+}
+
+
+
+
+.row2 .template .grid .hover-over
+{
+  position: absolute;
+  width: 100%;
+  height: 98%;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.row2 .template .grid > img
+{
+  height: 100%; width: 100%; object-fit: 'contain';
+}
+
+
+
+.row3
+{
+ position: relative;
+  height: 50%;
+ width: 100%;
+ margin: 1%;
+
+}
+
+.row3 .text
+{
+  color: rgb(0, 0, 0);
+ font-size: 30px;
+ margin-left: 5%;
+ font-weight: bold;
+
+}
+
+
+
+.row3 .leftBtn
+{
+  position: absolute;
+  top: 150px;
+  left: 0 ;
+  width: 50px;
+  height: 100px;
+}
+.row3 .rightBtn
+{
+  position: absolute;
+  top: 150px;
+  right:20px;
+  width: 50px;
+  height: 100px;
+}
+.scrol_img
+{
+  height: 250px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+
+.img_fit
+{
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%; width: 100%; object-fit: 'contain';
+
+}
+
+
+.row4
+{   
+   width: 100%;
+   height: 60%;
+  
+
+}
+.row4 .template
+{
+ height: 50%;
+}
+
+.row4 .text
+{
+  color: rgb(0, 0, 0);
+ font-size: 30px;
+ margin-left: 5%;
+ font-weight: bold;
+
+}
+
+
+
+.row4 .template .grid
+{
+   
+  margin-bottom: 5%;
+ 
+  background-color: white;
+  width: 100%;
+  height: 300px;
+
+}
+.row4 .template .grid > img
+{
+  height: 100%; width: 100%; object-fit: 'contain';
+}
+
+.text_img
+{
+  height: 100px;
+  width: 100%;
+  font-size: 25px; font-weight: bold; padding-bottom: 10px;  color: rgb(255, 255, 255);
+  margin-top: -10px;
+  font-size: 2.0vw;
+  overflow: hidden;
+
+}

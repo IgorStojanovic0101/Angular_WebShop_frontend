@@ -1,0 +1,188 @@
+
+ 
+<mat-sidenav-container class="sidebar-sidenav-container">
+    <mat-sidenav [(opened)]="opened"  (closed)="onClose()" mode="over"  #snav>
+   
+  
+  <div *ngIf="(navBar$ | async) as navBar">
+
+    <div class="NavName">Hello, {{navBar.userName}}</div>
+
+    <mat-nav-list class="side-navnar" style="padding-top: 0%;">
+    
+      <ng-container *ngFor="let menu of navBar.departments; index as i;">
+          <ng-container [ngTemplateOutlet]="menu.CategoryList ?  childMenu : parentMenu"
+              [ngTemplateOutletContext]="{menu:menu}">
+          </ng-container>
+      </ng-container>
+  
+    </mat-nav-list>
+  </div>
+  <ng-template #parentMenu let-menu="menu">
+      <mat-list-item [routerLink]="menu.routerLink" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">
+          <mat-icon></mat-icon> {{menu.DepartmentName}}
+      </mat-list-item>
+  </ng-template>
+  
+  <ng-template #childMenu let-menu="menu">
+      <mat-expansion-panel [class.mat-elevation-z0]="true">
+          <mat-expansion-panel-header>
+              <mat-icon mat-list-icon>{{menu.icon}}</mat-icon>{{menu.DepartmentName}}
+          </mat-expansion-panel-header>
+          <mat-nav-list>
+              <mat-list-item (click)="CallCategory(submenu.RecordPk)" *ngFor="let submenu of menu.CategoryList" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact:  true}">
+                <mat-divider></mat-divider>
+                  <mat-icon></mat-icon> {{submenu.CategoryName}}
+                  <mat-divider></mat-divider>
+
+              </mat-list-item>
+          </mat-nav-list>
+      </mat-expansion-panel>
+  </ng-template>
+    
+    <mat-list>
+      <mat-divider></mat-divider>
+      
+   
+    <mat-list-item>     
+       <button (click)="logout()" class="col-12 btn btn-light btn-outline-primary" Button>LogOut</button>
+    </mat-list-item>
+   
+
+
+    </mat-list>
+
+  </mat-sidenav>
+   
+     
+  <mat-sidenav-content>
+ 
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+
+  <mat-toolbar *ngIf="(user$ | async) as user">
+    <mat-toolbar-row class="toolbar-row1">
+      <a routerLink="/auth/home" class="text-white text-decoration-none">
+        <img
+        width="40"
+        alt="Angular Logo"
+        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+      />
+      <span>Welcome</span>
+      </a>
+      <form class="example-form"  [formGroup]="SearchForm">
+    
+        <input matInput  formControlName="search"   class="searchInput" placeholder="Search.." (keyup)="handleKeyUp($event)">
+       
+         <button (click)="onSubmit($event)" class="btn-warning searchBtn"><mat-icon>search</mat-icon></button>
+
+      </form>
+        <div class="spacer"></div>
+
+        <div  style="display: flex; justify-content: center;" >
+          <div class="btn-group me-3">
+            <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+              <div *ngIf="!user.isAdmin">
+              <button type="button" class="btn btn-light ime" ngbDropdownToggle> Hello, {{user.FirstName + ' ' + user.LastName}} </button>
+              </div>
+              <div *ngIf="user.isAdmin">
+                <button type="button" class="btn btn-light ime" ngbDropdownToggle> Hello, Master </button>
+                </div>
+              <div class="dropdown-menu" ngbDropdownMenu>
+                <div *ngIf="!user.isAdmin">
+                  <button ngbDropdownItem (click)="GoToBasket()" class="dropdown-item d-flex align-items-center py-2"> <i class="fa fa-shopping-cart mr-3"> View Basket </i></button>             
+                  <button ngbDropdownItem (click)="GoToHistory()" class="dropdown-item d-flex align-items-center py-2"> <i class="bi bi-book-half mr-3"> Order History </i></button>             
+               </div>
+                <div class="dropdown-divider"> </div>
+                <button ngbDropdownItem  (click)="logout()" class="dropdown-item d-flex align-items-center py-2"><i class="fa fa-sign-out mr-3"> LogOut</i> </button>
+
+              </div>
+            </div>
+          
+          </div>
+       
+            <div  *ngIf="!user.isAdmin" style="display: flex; justify-content: center;"> 
+              <a  mat-button (click)="GoToHistory()" style="margin-right: 20px;" class="position-relative text-white  fa-2x"><i class="bi bi-book-half"> </i></a>
+              <a (click)="GoToBasket()" class="position-relative"> 
+                <div style="margin-right: 20px;">
+                <i class="pull-left fa fa-shopping-cart fa-2x text-white"></i>
+                <div *ngIf="(basket$ |async) as basket" class="cart-no">{{basket.itemList.length}}</div>
+                </div>
+              </a>
+            </div>
+            <button *ngIf="user.isAdmin"  (click)="logout()" class="btn btn-light d-flex align-items-center py-2"><i class="fa fa-sign-out mr-3"> LogOut</i> </button>
+
+        
+     </div>
+
+      
+    
+
+    </mat-toolbar-row>
+  
+    <mat-toolbar-row class="toolbar-row2">
+   
+      <button mat-button (click)="stopSliding()"><mat-icon> menu </mat-icon></button>
+
+      <div  style="display: flex; padding-left: 5%;">   
+        <div *ngIf="(departments$ | async) as departments">
+          <div class="btn-group me-3">
+            <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+              <button type="button" class="btn btn-light ime" ngbDropdownToggle> <i class="fa fa-list"></i> Departments </button>
+              <div class="dropdown-menu" ngbDropdownMenu>
+                <button ngbDropdownItem (click)="onSelect(item.RecordPk)" *ngFor="let item of departments" class="dropdown-item d-flex align-items-center py-2">  {{item.DepartmentName}} </button>             
+             
+               
+              </div>
+            </div>
+          
+          </div>
+
+      
+        </div>
+        <div  style="padding-left: 5%;">
+          <div *ngIf="(categories$ | async) as categories">
+
+          <div class="btn-group me-3">
+            <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+              <button type="button" class="btn btn-light ime" ngbDropdownToggle><i class="fa fa-list-alt"></i> Categories  </button>
+              <div class="dropdown-menu" ngbDropdownMenu>
+                <button ngbDropdownItem (click)="onSelectCategory(item.RecordPk)" *ngFor="let item of categories" class="dropdown-item d-flex align-items-center py-2"> {{item.CategoryName}} </button>             
+             
+               
+              </div>
+            </div>
+          
+          </div>
+          </div>
+        </div>
+        <div *ngIf="user.isAdmin" style="padding-left: 5%;">
+               <button (click)="BacktoAdmin()"  class="btn btn-light d-flex align-items-center py-2"> Back to admin View </button>               
+        </div>
+        <div *ngIf="user.isAdmin && (userSeeAss$ | async) as userSeeAss" style="padding-left: 5%; color: rgb(255, 255, 255);">
+          <p>Vidi kao: {{userSeeAss.FirstName}} {{userSeeAss.LastName}}</p>     
+          </div>      
+        
+
+    </div>  
+
+   
+
+    <div class="spacer"></div>
+
+    
+    </mat-toolbar-row>
+  
+  </mat-toolbar>
+  
+  
+  <router-outlet></router-outlet>
+  <!-- Ovde treba da ide content iz drugih komponenti -->
+  
+  
+  
+  <app-footer></app-footer>
+  
+  </mat-sidenav-content>
+  
+  </mat-sidenav-container>
+  

@@ -1,0 +1,112 @@
+
+
+
+
+
+  <div class="content" *ngIf="(product$ | async) as product">
+    
+    
+
+
+
+    <div  class="proizvod"> 
+
+    
+    
+    <img class="bigImage" (click)="Getproductslide(product.current_image.RecordFk)" src="{{product.current_image.src}}">
+    
+    <div class="image_list">
+    <mat-list-item  *ngFor="let image of product.Images">  
+        <img class="img-responsive img-thumbnail col-lg-2" (click)="ImageChange(image)" src="{{image.src}}">
+   
+    </mat-list-item>  
+    </div>
+     
+
+    </div>
+
+
+    <div  class="opis"> 
+
+  
+      <div class="col-lg-10" >        
+        <p class="text"> {{product.ProductName}} </p> 
+        <br>
+          <div class="text_details">
+            Product details: <p style="font-style: italic;">- {{product.ProductDetails}} </p> 
+            <br>
+            <p> Rating: <mat-icon class="star" style="padding-left: 20px;" *ngFor="let star of product.RatingStar let i = index"> {{star}} </mat-icon> </p>
+           <br>
+           <p>Product Price: <b>{{product.ProductPrice | currency:'EUR':true}}</b></p>
+          </div>
+      </div>
+  
+  
+   </div>
+   <div  class="kupovina"> 
+
+        <div class="part1">
+         
+              <h1>{{price| currency:'EUR'}}</h1> 
+          
+          
+          <div class="d-flex justify-content-start align-items-center">
+            <i (click)="DecrementCount()" class="fa fa-minus-circle text-warning" style="cursor: pointer;font-size:2em;"></i>
+            <span class="font-weight-bold" style="font-size: 1.5em;">{{itemCount}}</span>
+            <i (click)="IncrementCount()" class="fa fa-plus-circle text-warning mr-2" style="cursor: pointer;font-size:2em;"></i>
+
+          </div>
+        </div>
+
+        
+        <div class="part2">
+        
+             <button mat-button class="btn1 btn btn-light btn-outline-primary" (click)="addItemToBasket()" Button><i class="fa fa-shopping-cart mr-3"></i> Dodaj u Korpu</button>
+        
+        </div>
+
+          
+        
+    </div>
+
+
+
+    <ng-template #contentImageList let-modal>
+    
+        <div class="modal-body">
+          <form>
+            <ngb-carousel>
+              <ng-template ngbSlide *ngFor="let item of product.Images">
+                <div class="picsum-img-wrapper">
+                  <img [src]="item.src" class="popupclass" alt="Random first slide">
+                </div>
+               
+              </ng-template>
+              
+              
+            </ngb-carousel>
+            
+          </form>
+        </div>
+        
+        </ng-template>
+        
+        
+
+
+
+
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+  
+  

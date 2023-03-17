@@ -1,0 +1,116 @@
+<div class="pb-5">
+
+    <div class="content">
+
+            <div class="product">  
+                <h2>Create Product</h2>
+  
+               
+
+                
+                <div>
+                <form [formGroup]="productFrom" >        
+            
+                        <input type="text" placeholder="Product Name" class="inp" formControlName="ProductName"/>
+                        <input type="text" placeholder="Product Details" class="inp" formControlName="ProductDetails"/>
+                        <input type="text" placeholder="Product Price" class="inp" formControlName="ProductPrice"/>   
+                </form>
+                </div>
+
+                <input type="file"  (change)="ImageUpload($event)" class="inp">
+
+
+
+                <div style="display: flex;">   
+                    <div *ngIf="(departments$ | async) as departments">
+                    <select (change)="onSelect($event)">
+                        <option>Select Department</option>
+                        <option *ngFor="let item of departments" value="{{item.RecordPk}}"> {{item.DepartmentName}}</option>
+                    </select>
+
+                    <!--<div class="btn-group me-3">
+                        <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                        <div  ngbDropdownToggle>Select Department </div>
+                            <div class="dropdown-menu" ngbDropdownMenu (change)="onSelect($event)">
+                                <div ngbDropdownItem  class="dropdown-item d-flex align-items-center py-2">    </div>     
+                                <div ngbDropdownItem   class="dropdown-item d-flex align-items-center py-2">    </div>     
+
+                                <div class="dropdown-divider"> </div>
+                        </div>
+                        </div>
+                    
+                    </div>-->
+                </div>
+                <div>
+                    <select (change)="onSelectCategory($event)">
+                        <option>Select Category</option>
+                        <option *ngFor="let item of (categories$ | async)" value="{{item.RecordPk}}"> {{item.CategoryName}}</option>
+                    </select>
+                </div>
+
+             </div>  
+             <div  style="margin-top:50px">
+             <button class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"  (click)="ProductForm()">Create Product </button>
+            </div>
+               
+    
+            </div>
+
+
+            <div class="department">  
+                <h2>Create Department</h2>
+  
+               
+
+                
+                <div>
+                <form [formGroup]="departmentForm" >        
+            
+                        <input type="text" placeholder="Department Name" class="inp" formControlName="DepartmentName"/>
+                </form>
+                </div>
+
+                <input type="file"  (change)="DepartmentImageUpload($event)" class="inp">
+
+
+
+                
+             <div  style="margin-top:50px">
+             <button class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"  (click)="DepartmentForm()">Create Department </button>
+            </div>
+               
+    
+            </div>
+
+            <div class="category">  
+                <h2>Create Category</h2>
+  
+               
+
+                
+                <form [formGroup]="categoryForm" >        
+            
+                        <input type="text" placeholder="Category Name" class="inp" formControlName="CategoryName"/>
+                </form>
+
+                <input type="file"  (change)="CategoryImageUpload($event)" class="inp">
+
+                <div *ngIf="(departments$ | async) as departments">
+                    <select (change)="onSelect($event)">
+                        <option>Select Department</option>
+                        <option *ngFor="let item of departments" value="{{item.RecordPk}}"> {{item.DepartmentName}}</option>
+                    </select>
+                    </div>
+
+                
+             <div  style="margin-top:50px">
+             <button class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"  (click)="CategoryForm()">Create Category </button>
+            </div>
+               
+    
+            </div>
+
+   
+
+    </div>
+</div>

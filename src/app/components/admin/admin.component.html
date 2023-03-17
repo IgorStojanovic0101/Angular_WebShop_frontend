@@ -1,0 +1,27 @@
+<div class="container pb-5">
+
+    
+        
+    <div class="content">
+                <div  class="items"> 
+              
+                        
+                    <button mat-button (click)="DataImport()" class="m-1 btn btn-light btn-outline-primary" Button>Data Import</button>
+                    <button mat-button (click)="UpdateData()" class="m-1 btn btn-light btn-outline-primary" Button>Update Data</button>
+
+               
+                    <div style="display: flex;justify-content: center;">
+                        <p> Vidi kao..</p>
+                        
+                        <div *ngIf="(users$ | async) as users">
+                            <select (change)="onSelect($event)">
+                                <option>Select User</option>
+                                <option *ngFor="let item of users" value="{{item.UserPk}}"> {{item.FirstName}} {{item.LastName}}</option>
+                            </select>
+
+                        </div>
+                    </div> 
+                 </div>    
+
+
+    </div>

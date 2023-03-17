@@ -1,0 +1,42 @@
+    <div *ngIf="(history$ | async) === null"> 
+            <p>There are no items in your history</p>
+    </div>
+        
+        
+        <div>
+
+          
+        
+
+        <div class="content">
+
+                     <app-filter ></app-filter>
+
+                    <div  class="items"> 
+                        <h4 class="text">Now you can rate your products</h4>
+
+                        <div *ngIf="(history$ | async) as history">       
+                            
+                        
+                
+                            <div  *ngFor="let item of history.itemList">
+                                <div class="row">
+                                
+                                <img class="img-responsive img-thumbnail col-lg-4 imagediv" src="{{item.slika}}">
+                            
+                                <div class="col-lg-4" style="font-weight: bold; font-size: 25px; padding-left: 5%;"> 
+                                 {{item.ProductName}}
+                                <br>
+                                <p> <mat-icon class="star star_{{item.HistoryItemPk}}" *ngFor="let star of item.RatingStar let i = index" (click)="onClick(item.HistoryItemPk,i)"> {{star}} </mat-icon> </p>
+
+                                </div>
+                            
+                                </div>
+                            
+                            </div> 
+                        </div>
+                    </div>
+            </div>
+
+
+        </div>

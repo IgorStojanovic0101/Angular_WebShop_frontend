@@ -1,0 +1,19 @@
+<div  class="filter"> 
+
+   
+        <h2 class="example-h2">Filter</h2>
+        <section class="example-section" #templateForm="ngForm" [formGroup]="filter">
+          <h4>Select your toppings:</h4>
+          <p><mat-checkbox formControlName="Ten_to_20"> 10 to 20$</mat-checkbox></p>
+          <p><mat-checkbox formControlName="Twenty_to_30">20 to 30$</mat-checkbox></p>
+         
+        
+       
+          <p> <mat-icon class="star" *ngFor="let star of stars let i = index" (click)="onClick(i)"> {{star}} </mat-icon> </p>
+           <button mat-button (click)="Reset()" class="m-1 btn btn-light btn-outline-primary" Button>Reset</button>
+
+        </section>
+        
+  
+
+  </div>

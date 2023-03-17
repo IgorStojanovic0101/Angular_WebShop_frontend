@@ -1,0 +1,41 @@
+.content {
+    /* display: flex;*/
+    
+     padding-top: 2%;
+     margin-top: 0%;
+    width: 100%;
+    height: 100% auto;
+   display: flex;
+   }
+   .product{
+    display: block;
+  
+    height: 450px;
+    width: 350px;
+    padding: 2%;
+    border: 4px solid gray;
+    margin:5%;
+   
+}
+
+.department{
+    display: block;
+  
+    height: 450px;
+    width: 350px;
+    padding: 2%;
+    border: 4px solid gray;
+    margin:5%;
+
+}
+
+.category{
+    display: block;
+  
+    height: 450px;
+    width: 350px;
+    padding: 2%;
+    border: 4px solid gray;
+    margin:5%;
+
+}

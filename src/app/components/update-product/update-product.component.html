@@ -1,0 +1,88 @@
+<div class="pb-5">
+
+    <div class="content">
+
+            <div class="product">  
+                <h2>Update Product</h2>
+  
+               
+
+                
+               
+
+
+                <div style="display: flex;">   
+                    <div *ngIf="(departments$ | async) as departments">
+                    <select (change)="onSelect($event)">
+                        <option>Select Department</option>
+                        <option *ngFor="let item of departments" value="{{item.RecordPk}}"> {{item.DepartmentName}}</option>
+                    </select>
+
+                    <!--<div class="btn-group me-3">
+                        <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                        <div  ngbDropdownToggle>Select Department </div>
+                            <div class="dropdown-menu" ngbDropdownMenu (change)="onSelect($event)">
+                                <div ngbDropdownItem  class="dropdown-item d-flex align-items-center py-2">    </div>     
+                                <div ngbDropdownItem   class="dropdown-item d-flex align-items-center py-2">    </div>     
+
+                                <div class="dropdown-divider"> </div>
+                        </div>
+                        </div>
+                    
+                    </div>-->
+                </div>
+                <div>
+                    <select (change)="onSelectCategory($event)">
+                        <option>Select Category</option>
+                        <option *ngFor="let item of (categories$ | async)" value="{{item.RecordPk}}"> {{item.CategoryName}}</option>
+                    </select>
+                </div>
+                <div>
+                    <select (change)="onSelectProduct($event)">
+                        <option>Select Product</option>
+                        <option *ngFor="let item of (products$ | async)" value="{{item.ProductPk}}"> {{item.ProductName}}</option>
+                    </select>
+                </div>
+
+                 </div>  
+                <div *ngIf="(product$ | async) as product">
+
+                <form  [formGroup]="productFrom" >        
+            
+                    <p>Product Name: </p> <input type="text" placeholder="Product Name" class="inp"  [(ngModel)]="product.ProductName"  formControlName="ProductName"/>
+                    <br>
+                    <p>Product Details: </p><input type="text" placeholder="Product Details" class="inp" [(ngModel)]="product.ProductDetails"  formControlName="ProductDetails"/>   
+                    <br>
+                    <p>Product Price: </p><input type="text" placeholder="Product Price" class="inp" [(ngModel)]="product.ProductPrice"  formControlName="ProductPrice"/>   
+
+                    <p>If you add main photo check this, otherwise not.</p>
+                    <p> Main photo :</p> <input type="checkbox" style="scale: 2;" placeholder="Main Photo" class="inp"  formControlName="MainPhoto"/>   
+                    
+                    <img class="bigImage"  src="{{product.slika}}">
+    
+                    <p>Image List :</p> 
+                    <div class="image_list">
+                    <mat-list-item  *ngFor="let image of product.Images">  
+                        <img class="img-responsive img-thumbnail col-lg-2"  src="{{image.src}}">
+                   
+                    </mat-list-item>  
+                    </div>
+                </form>
+                </div>
+
+                <p>Add Image </p> <input type="file"  (change)="ImageUpload($event)" class="inp">
+
+
+             <div  style="margin-top:50px">
+             <button class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm"  (click)="ProductForm()">Update Product </button>
+            </div>
+               
+    
+            </div>
+
+
+      
+   
+
+    </div>
+</div>
