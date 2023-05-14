@@ -1,0 +1,117 @@
+
+
+<div class="row2" *ngIf="(row2Items$ | async) as row2Items">
+        
+          
+
+    <div class="template">
+      <div *ngIf="row2Items.TopDepartment">
+        <div class="text_img"> <h1> Top Department </h1></div>
+        <div *ngIf="user && user.isAdmin" class="Score">{{row2Items.TopDepartment.Score}} </div>
+        <div class="grid">
+      
+          <img [src]="row2Items.TopDepartment.slika" (click)="CallDepartment(row2Items.TopDepartment.RecordPk)"
+          > 
+         
+        </div> 
+        <p class="text_img">{{row2Items.TopDepartment.DepartmentName}}<p>
+
+        <a (click)="CallDepartment(row2Items.TopDepartment.RecordPk)"> 
+          <div class="ShopNow">
+          <i style="padding: 2%;" class="fa fa-shopping-cart fa-2x"></i>
+            <p style="padding-top: 3%;">Show Now</p>
+        
+          </div> 
+        </a> 
+      </div>
+      </div>
+      
+      <div class="template">
+        
+
+      <div *ngIf="row2Items.TopCategory">
+
+        <div class="text_img"> <h1> Top Category</h1></div>
+        <div *ngIf="user && user.isAdmin" class="Score">{{row2Items.TopCategory.Score}} </div>
+
+        <div class="grid">
+      
+         <img [src]="row2Items.TopCategory.slika" (click)="CallCategory(row2Items.TopCategory.RecordPk)" > 
+
+        </div> 
+        <p class="text_img">{{row2Items.TopCategory.CategoryName}}<p>
+
+        <a (click)="CallCategory(row2Items.TopCategory.RecordPk)"> 
+          <div class="ShopNow">
+          <i style="padding: 2%;" class="fa fa-shopping-cart fa-2x"></i>
+            <p style="padding-top: 3%; ">Show Now</p>
+        
+          </div> 
+        </a> 
+     </div>
+
+
+    </div>
+
+    <div class="template">
+        
+
+      <div *ngIf="row2Items.TopProduct">
+
+        <div class="text_img"> <h1> <i class="fa fa-crown"></i>  Top Product</h1></div>
+        <div *ngIf="user && user.isAdmin" class="Score">{{row2Items.TopProduct.Score}} </div>
+
+        <div class="grid">
+      
+          <img [src]="row2Items.TopProduct.slika" (click)="openProduct(row2Items.TopProduct.ProductPk)"> 
+
+        </div> 
+        
+        <p class="text_img">{{row2Items.TopProduct.ProductName}}<p>
+
+        <a (click)="openProduct(row2Items.TopProduct.ProductPk)"> 
+          <div class="ShopNow">
+          <i style="padding: 2%;" class="fa fa-shopping-cart fa-2x"></i>
+            <p style="padding-top: 3%; " >Show Now</p>
+        
+          </div> 
+        </a> 
+     </div>
+
+
+    </div>
+
+
+    <div class="template">
+        
+
+      <div *ngIf="row2Items.TopSale">
+
+        <div class="text_img">  <h1><i class="fa fa-crown"></i> Top Sale</h1>  </div>
+        <div *ngIf="user && user.isAdmin" class="Score">{{row2Items.TopSale.Score}} </div>
+
+        <div class="grid">
+         
+          <img [src]="row2Items.TopSale.slika" (click)="openProduct(row2Items.TopSale.ProductPk)"> 
+        
+        </div>
+        <p class="text_img">{{row2Items.TopSale.ProductName}}<p>
+
+        <a (click)="openProduct(row2Items.TopSale.ProductPk)"> 
+          <div class="ShopNow">
+          <i style="padding: 2%;" class="fa fa-shopping-cart fa-2x"></i>
+            <p style="padding-top: 3%; ">Show Now</p>
+        
+          </div> 
+        </a> 
+     </div>
+
+
+    </div>
+
+   <!---------------------------------------------------------------------------->
+
+ 
+
+ 
+</div>

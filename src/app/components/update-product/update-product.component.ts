@@ -4,8 +4,8 @@ import { Observable, Subscriber } from 'rxjs';
 import { ProductStatus } from 'src/app/models/enums/productStatus';
 import { ICategory, IDepartment } from 'src/app/models/navbar';
 import { IProduct, IProductUpload } from 'src/app/models/product';
-import { DataimportService } from 'src/app/shared/dataimport/dataimport.service';
-import { ProductsService } from 'src/app/shared/products/products.service';
+import { DataimportService } from 'src/app/shared/services/dataimport/dataimport.service';
+import { ProductsService } from 'src/app/shared/services/products/products.service';
 
 @Component({
   selector: 'app-update-product',

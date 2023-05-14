@@ -1,0 +1,124 @@
+
+
+<div class="row1">
+
+
+
+
+    <ngb-carousel [interval]="interval" #carousel>
+    
+      <ng-template ngbSlide *ngFor="let reklama of reklame">
+    
+        <div class="wrapper">
+    
+          <img [src]="reklama.src" alt="Random first slide">
+    
+        </div>
+    
+        
+    
+      </ng-template>
+    
+    </ngb-carousel>
+
+
+    <div  class="main">
+      <div class="template">
+        <div class="text">Shop by Category</div>
+        <div class="grid">
+        <mat-grid-list cols="2" rows="2" rowHeight="50%" gutterSize="2px">
+            <mat-grid-tile *ngFor="let item of (categories$ | async)"  (click)="CallCategory(item.RecordPk)" class="image" style="cursor: pointer;" > 
+                                           
+                  <img  *ngIf="user && !user.isAdmin" [src]="item.slika" class="img-fluid bg-info">                   
+                  <div *ngIf="user && user.isAdmin">
+                    <img [src]="item.slika" style="width:100%; height: 150px; object-fit: 'fill';">  
+                     <p  class="Score">{{item.Score}} </p> 
+                  </div>
+
+                    <div class="d-flex align-items-center justify-content-center hover-overlay">
+                      <p class="hover_text">{{item.CategoryName}}</p>
+                    </div>
+                 
+                 
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div> 
+       
+        <a (click)="CallCategoryDepartment()"> 
+          <div class="ShopNow">
+           <i style="padding: 2%;" class="fa fa-shopping-cart fa-2x"></i>
+             <p style="padding-top: 3%; ">Show Now</p>
+        
+        </div> 
+      </a>
+      </div>
+
+      <div  class="template">
+          <div class="text"> Shop by Department</div>
+          <div class="grid">
+            <mat-grid-list cols="2" rows="2" rowHeight="50%" gutterSize="2px">
+              <mat-grid-tile *ngFor="let item of (departments$ | async)" (click)="CallDepartment(item.RecordPk)" class="image" style="cursor: pointer;" > 
+              
+               <img  *ngIf="user && !user.isAdmin" [src]="item.slika" class="img-fluid bg-info">                   
+                  <div *ngIf="user && user.isAdmin">
+                    <img [src]="item.slika" style="width:100%; height: 150px; object-fit: 'fill';">  
+                     <p  class="Score">{{item.Score}} </p> 
+                  </div>
+                <div class="d-flex align-items-center justify-content-center hover-overlay">
+                 <p class="hover_text">{{item.DepartmentName}}</p>
+                </div>
+
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>  
+          <a (click)="CallDepartments()"> 
+            <div class="ShopNow">
+             <i style="padding: 2%;" class="fa fa-shopping-cart fa-2x"></i>
+               <p style="padding-top: 3%; ">Show Now</p>
+          
+          </div> 
+        </a>
+
+        </div>
+        <div  class="template">
+          <div class="prediction"><p> Recommended products </p></div>
+          <div class="grid" >
+            <mat-grid-list  cols="2" rows="2" rowHeight="50%" gutterSize="2px">
+              <mat-grid-tile *ngFor="let item of (row1Products_1$ | async)"  (click)="openProduct(item.ProductPk)"  class="image" style="cursor: pointer;" > 
+              
+                <img  *ngIf="user && !user.isAdmin" [src]="item.slika" class="img-fluid bg-info">                   
+                <div *ngIf="user && user.isAdmin">
+                  <img [src]="item.slika" style="width:100%; height: 150px; object-fit: 'fill';">  
+                   <p  class="Score">{{item.Score}} </p> 
+                </div>
+                <div class="d-flex align-items-center justify-content-center hover-overlay">
+                 <p class="hover_text">{{item.ProductName}}</p>
+                </div>
+
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>  
+      
+        </div>
+        <div   class="template">
+          <div class="prediction"> <h1>Keep shopping for</h1></div>
+          <div class="grid">
+            <mat-grid-list cols="2" rows="2" rowHeight="50%" gutterSize="2px">
+              <mat-grid-tile *ngFor="let item of (row1Products_2$ | async)"  (click)="openProduct(item.ProductPk)"  class="image" style="cursor: pointer;" > 
+                
+                <img  *ngIf="user && !user.isAdmin" [src]="item.slika" class="img-fluid bg-info">                   
+                <div *ngIf="user && user.isAdmin">
+                  <img [src]="item.slika" style="width:100%; height: 150px; object-fit: 'fill';">  
+                   <p  class="Score">{{item.Score}} </p> 
+                </div>
+                <div class="d-flex align-items-center justify-content-center hover-overlay">
+                 <p class="hover_text">{{item.ProductName}}</p>
+                </div>
+
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </div>  
+    </div>
+
+</div>

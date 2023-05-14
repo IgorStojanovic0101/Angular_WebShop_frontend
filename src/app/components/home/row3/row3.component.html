@@ -1,0 +1,21 @@
+
+
+<div class="row2" style="padding-top:0%">
+          
+    <div class="template" *ngFor="let item of (row3Products$ | async)">
+      <div class="text_img"> <h1>{{item.ProductName}}</h1></div>
+      <div class="grid">
+    
+        <img [src]="item.slika" (click)="openProduct(item.ProductPk)"> 
+
+      </div> 
+      <a (click)="openProduct(item.ProductPk)"> 
+        <div class="ShopNow">
+          <i style="padding: 2%;" class="fa fa-shopping-cart fa-2x"></i>
+            <p style="padding-top: 3%;">Show Now</p>
+      
+        </div> 
+      </a> 
+    </div>
+
+  </div>

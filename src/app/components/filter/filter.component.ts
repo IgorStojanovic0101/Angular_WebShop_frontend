@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CreateStatus } from 'src/app/models/enums/CreateStatus';
 import { FilterStatus } from 'src/app/models/enums/filterStatus';
 import { Filter, IFilter } from 'src/app/models/filter';
-import { FilterPageService } from 'src/app/shared/filterPage/filter-page.service';
+import { FilterPageService } from 'src/app/shared/services/filterPage/filter-page.service';
 
 @Component({
   selector: 'app-filter',

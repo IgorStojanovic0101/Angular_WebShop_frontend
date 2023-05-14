@@ -1,0 +1,24 @@
+
+
+<div class="row4"  *ngIf="(row5Items$ | async) as row5Items">
+    <div class="text"> <h1>Products under {{row5Items.ProductPrice | currency:'EUR':true }}</h1></div>
+    <div style=" display: flex; justify-content: center; ">
+        <div class="template" *ngFor="let item of row5Items.products">
+          <div class="text_img"> <h1>{{item.ProductName}}</h1></div>
+          <div class="grid">
+        
+            <img [src]="item.slika" (click)="openProduct(item.ProductPk)"> 
+
+          </div> 
+          <a (click)="openProduct(item.ProductPk)"> 
+            <div class="ShopNow">
+            <i style="padding: 2%;" class="fa fa-shopping-cart fa-2x"></i>
+              <p style="padding-top: 3%;">Show Now</p>
+          
+            </div> 
+          </a> 
+      </div>
+    </div>
+
+  </div>
+

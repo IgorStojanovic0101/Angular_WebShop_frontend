@@ -71,9 +71,17 @@ button:disabled{
   min-height: 100vh;
 }
 .bg-image {
-  background-image: url('https://therichpost.com/wp-content/uploads/2021/02/login-split.jpg');
+
+   margin:0; /* If you want no margin */
+   padding:0; /*if your want to padding */
   background-size: cover;
   background-position: center center;
+}
+
+#myImage
+{
+ 
+  object-fit: cover;
 }
 .invalid-feedback
 {

@@ -2,22 +2,22 @@ import { AfterViewInit, Component, OnInit,ViewEncapsulation } from '@angular/cor
 import { Router } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { filter, Observable, take } from 'rxjs';
-import { MasterService } from 'src/app/shared/master-service.service';
 import { IMenu } from 'src/app/models/i-menu';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LoaderService } from '../loader/loader.service';
-import { KorpaService } from 'src/app/shared/korpa/korpa.service';
+import { KorpaService } from 'src/app/shared/services/korpa/korpa.service';
 import { IBasket } from 'src/app/models/basket';
-import { UserService } from 'src/app/shared/user/user.service';
+import { UserService } from 'src/app/shared/services/user/user.service';
 import { IUser } from 'src/app/models/user';
-import { HistoryService } from 'src/app/shared/history/history.service';
+import { HistoryService } from 'src/app/shared/services/history/history.service';
 import { ICategory, IDepartment, INavBar } from 'src/app/models/navbar';
-import { NavBarService } from 'src/app/shared/navBar/nav-bar.service';
-import { AuthomeService } from 'src/app/shared/authome/authome.service';
+import { NavBarService } from 'src/app/shared/services/navBar/nav-bar.service';
+import { AuthomeService } from 'src/app/shared/services/authome/authome.service';
 import * as CryptoJS from 'crypto-js';  
-import { DataimportService } from 'src/app/shared/dataimport/dataimport.service';
+import { DataimportService } from 'src/app/shared/services/dataimport/dataimport.service';
 import { SearchModel } from 'src/app/models/search-model';
-import { HomeService } from 'src/app/shared/home/home.service';
+import { HomeService } from 'src/app/shared/services/home/home.service';
+import { MasterService } from 'src/app/shared/services/master-service.service';
 
 @Component({
   selector: 'app-auth',

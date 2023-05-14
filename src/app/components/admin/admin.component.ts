@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IUser } from 'src/app/models/user';
-import { HomeService } from 'src/app/shared/home/home.service';
-import { UserService } from 'src/app/shared/user/user.service';
+import { HomeService } from 'src/app/shared/services/home/home.service';
+import { UserService } from 'src/app/shared/services/user/user.service';
 
 @Component({
   selector: 'app-admin',

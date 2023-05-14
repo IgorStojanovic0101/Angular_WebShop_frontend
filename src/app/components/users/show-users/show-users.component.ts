@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MasterService } from 'src/app/shared/master-service.service';
+import { MasterService } from 'src/app/shared/services/master-service.service';
 
 @Component({
   selector: 'app-show-users',

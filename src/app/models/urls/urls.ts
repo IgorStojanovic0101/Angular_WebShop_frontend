@@ -1,79 +1,84 @@
+import { environment } from "src/environments/environment";
+
 export class ServiceUrls 
 {
-     public ApiUrl:string = "http://localhost:90/api";
+    public static ApiUrl: string = environment.ApiUrl;
 
-    static User = class extends ServiceUrls {
-       
-        
-        private pref:string = this.ApiUrl +"/User/";
-
-        public GetUsers:string = this.pref + "GetUsers";
-        public FindUsers:string = this.pref + "FindUsers";
-        public SetUp:string = this.pref + "SetUp";
-        public GetUserById:string = this.pref + "GetUserById";
-
+    public static get User() {
+        const pref = `${ServiceUrls.ApiUrl}/User`;
+        return {  
+ 
+         GetUsers: `${pref}/GetUsers`,
+         FindUsers: `${pref}/FindUsers`,
+         SetUp: `${pref}/SetUp`,
+         GetUserById: `${pref}/GetUserById`
+        };
     }
-    static Product = class extends ServiceUrls {
-       
-        
-        private pref:string = this.ApiUrl +"/Products/";
-        public SearchProducts:string = this.pref + "SearchProducts";
-        public GetGroupProducts:string = this.pref + "GetGroupProducts";
-        public GetProducts:string = this.pref + "GetProducts";       
-        public GetProductsByCategoryFk: string = this.pref + "GetProductsByCategoryFk";
-        public GetProductsByDepartmentFk:string = this.pref + "GetProductsByDepartmentFk";
-        public FilterProducts: string = this.pref + "FilterProducts";
-        public SetProduct : string = this.pref + "SetProduct";
-        public GetProductbyId:string = this.pref + "GetProductbyId";
-        public GetProductbycode:string = this.pref + "GetProductbycode";
-        public GetProductListByCategoryFk:string = this.pref + "GetProductListByCategoryFk";
-    }
+    public static get Product() {
 
-    static Basket = class extends ServiceUrls {
-        private pref:string = this.ApiUrl +"/Basket/";
+        const pref = `${ServiceUrls.ApiUrl}/Products`;
+        return {    
 
-        public GetBacket:string = this.pref + "GetBacket";
-        public GetBacketById:string = this.pref + "GetBacketById";
-
-        public SetBacket:string = this.pref +  "SetBacket";
-    }
-    static OrderHistory = class extends ServiceUrls {
-        private pref:string = this.ApiUrl +"/OrderHistory/";
-
-        public GetHistory:string = this.pref + "GetHistory";
-        public SetHistory:string = this.pref + "SetHistory";
-        public FilterHistoryProducts:string = this.pref + "FilterHistoryProducts";
-
+        SearchProducts:`${pref}/SearchProducts`,
+        GetGroupProducts:`${pref}/GetGroupProducts`,
+        GetProducts:`${pref}/GetProducts`,       
+        GetProductsByCategoryFk: `${pref}/GetProductsByCategoryFk`,
+        GetProductsByDepartmentFk: `${pref}/GetProductsByDepartmentFk`,
+        FilterProducts:  `${pref}/FilterProducts`,
+        SetProduct :  `${pref}/SetProduct`,
+        GetProductbyId: `${pref}/GetProductbyId`,
+        GetProductbycode: `${pref}/GetProductbycode`,
+        GetProductListByCategoryFk: `${pref}/GetProductListByCategoryFk`
+        };
     }
 
-    static Department = class extends ServiceUrls {
-        private pref:string = this.ApiUrl +"/Department/";
-
-        public GetNavBar:string = this.pref + "GetNavBar";
-        public GetDepartments:string = this.pref + "GetDepartments";
-        public GetCategories:string = this.pref + "GetCategories";
-        public SetDepartment:string = this.pref + "SetDepartment";
-        public SetCategory:string = this.pref + "SetCategory";
-        public GetAllCategories:string = this.pref + "GetAllCategories";
-    }
-
-    static Home = class extends ServiceUrls {
-        private pref:string = this.ApiUrl +"/Home/";
-
-        public GetHome:string = this.pref + "GetHome";
-        public SetDepartmentML:string = this.pref + "SetDepartmentML";
-        public SetCategoryML:string = this.pref + "SetCategoryML";
-        public GetDepartments:string = this.pref + "GetDepartments";
-        public GetCategories:string = this.pref + "GetCategories";
-        public GetRow1Products_1:string = this.pref + "GetRow1Products_1";
-        public GetRow1Products_2:string = this.pref + "GetRow1Products_2";
-        public GetRow2:string = this.pref + "GetRow2";
-        public GetRow3:string = this.pref + "GetRow3";
-        public GetProductsForTopCategory:string = this.pref + "GetProductsForTopCategory";
-        public GetRow5:string = this.pref + "GetRow5";
-        public GetRow6:string = this.pref + "GetRow6";
-
-
-    }
+    public static get Basket()  {
+        const pref: string = `${ServiceUrls.ApiUrl}/Basket`;
+        return {    
+        GetBacket: `${pref}/GetBacket`,
+        GetBacketById: `${pref}/GetBacketById`,
+        SetBacket: `${pref}/SetBacket`
+        }
+      };
+    
+      public static get OrderHistory() {
+        const pref: string = `${ServiceUrls.ApiUrl}/OrderHistory`;
+    
+        return {    
+        GetHistory: `${pref}/GetHistory`,
+        SetHistory: `${pref}/SetHistory`,
+        FilterHistoryProducts:  `${pref}/FilterHistoryProducts`
+        }
+      };
+    
+      public static get Department()  {
+        const pref: string = `${ServiceUrls.ApiUrl}/Department`;
+        return {    
+         GetNavBar:  `${pref}/GetNavBar`,
+         GetDepartments:  `${pref}/GetDepartments`,
+         GetCategories:  `${pref}/GetCategories`,
+         SetDepartment:  `${pref}/SetDepartment`,
+         SetCategory:  `${pref}/SetCategory`,
+         GetAllCategories:  `${pref}/GetAllCategories`
+        }
+      };
+    
+      public static get Home() {
+        const pref: string = `${ServiceUrls.ApiUrl}/Home`;
+        return {    
+         GetHome:  `${pref}/GetHome`,
+         SetDepartmentML: `${pref}/SetDepartmentML`,
+         SetCategoryML: `${pref}/SetCategoryML`,
+         GetDepartments: `${pref}/GetDepartments`,
+         GetCategories:  `${pref}/GetCategories`,
+         GetRow1Products_1:  `${pref}/GetRow1Products_1`,
+         GetRow1Products_2: `${pref}/GetRow1Products_2`,
+         GetRow2:  `${pref}/GetRow2`,
+         GetRow3:  `${pref}/GetRow3`,
+         GetProductsForTopCategory:  `${pref}/GetProductsForTopCategory`,
+         GetRow5:  `${pref}/GetRow5`,
+         GetRow6:  `${pref}/GetRow6`
+        }
+      }
 }
 

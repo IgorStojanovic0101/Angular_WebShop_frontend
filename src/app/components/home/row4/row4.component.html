@@ -1,0 +1,19 @@
+
+
+<div class="row3" *ngIf="(row4Products$ | async) as row4Products">
+    <div class="text"> <h1>Top {{row4Products.CategoryName}}</h1></div>
+    <drag-scroll #scroll [scroll-x-wheel-enabled]="false">
+        <div  *ngFor="let item of row4Products.products" drag-scroll-item>
+          <div class="scrol_img">
+            <img [src]="item.slika" (click)="openProduct(item.ProductPk)" class="img_fit" alt="...">
+            <div *ngIf="user && user.isAdmin" class="ScoreBlack">{{item.Score}} </div>
+
+          </div>
+        </div>  
+      </drag-scroll>
+
+  
+      <button (click)="moveLeft()" class="leftBtn pull-left">Left</button>
+      <button (click)="moveRight()" class="rightBtn pull-right">Right</button>
+    
+  </div>  

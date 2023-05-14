@@ -4,9 +4,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IDepartment } from 'src/app/models/navbar';
-import { FilterPageService } from 'src/app/shared/filterPage/filter-page.service';
-import { MasterService } from 'src/app/shared/master-service.service';
-import { ProductsService } from 'src/app/shared/products/products.service';
+import { FilterPageService } from 'src/app/shared/services/filterPage/filter-page.service';
+import { MasterService } from 'src/app/shared/services/master-service.service';
+import { ProductsService } from 'src/app/shared/services/products/products.service';
 
 @Component({
   selector: 'app-product-departments',

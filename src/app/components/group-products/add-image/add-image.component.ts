@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MasterService } from 'src/app/shared/master-service.service';
+import { MasterService } from 'src/app/shared/services/master-service.service';
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { IProduct } from 'src/app/models/product';

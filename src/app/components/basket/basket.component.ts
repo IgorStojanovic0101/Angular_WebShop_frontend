@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IBasket, IBasketitem } from 'src/app/models/basket';
-import { KorpaService } from 'src/app/shared/korpa/korpa.service';
+import { KorpaService } from 'src/app/shared/services/korpa/korpa.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { HistoryService } from 'src/app/shared/history/history.service';
+import { HistoryService } from 'src/app/shared/services/history/history.service';
 
 @Component({
   selector: 'app-basket',

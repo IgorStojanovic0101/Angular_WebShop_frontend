@@ -1,18 +1,18 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as CryptoJS from 'crypto-js';  
-import { MasterService } from 'src/app/shared/master-service.service';
+import { MasterService } from 'src/app/shared/services/master-service.service';
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { IProduct } from 'src/app/models/product';
 import { NgbModal, ModalDismissReasons, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { catchError, filter, map, Observable, of, take } from 'rxjs';
-import { ProductsService } from 'src/app/shared/products/products.service';
+import { ProductsService } from 'src/app/shared/services/products/products.service';
 import { IProductsPage } from 'src/app/models/products-page';
-import { FilterPageService } from 'src/app/shared/filterPage/filter-page.service';
+import { FilterPageService } from 'src/app/shared/services/filterPage/filter-page.service';
 import { IUser } from 'src/app/models/user';
 import { SearchModelClass } from 'src/app/models/search-model';
-import { UserService } from 'src/app/shared/user/user.service';
+import { UserService } from 'src/app/shared/services/user/user.service';
 @Component({
   selector: 'app-products',
   templateUrl: './group-products.component.html',
@@ -88,8 +88,7 @@ export class ProductsComponent implements OnInit,OnDestroy {
 
      
    
-    this.productService.GetProductsByDepartment(search).subscribe(()=>{
-    });
+    this.productService.GetProductsByDepartment(search).subscribe();
       }
   
   }});

@@ -4,13 +4,13 @@ import { Component, ElementRef, EventEmitter, Input, OnInit,OnDestroy, Output, V
 import { ActivatedRoute, Router } from '@angular/router';
 import * as CryptoJS from 'crypto-js';  
 import { IProduct, newProduct } from 'src/app/models/product';
-import { MasterService } from 'src/app/shared/master-service.service';
+import { MasterService } from 'src/app/shared/services/master-service.service';
 import { NgbModal, ModalDismissReasons, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ImageModel } from 'src/app/models/image-list-item';
-import { KorpaService } from 'src/app/shared/korpa/korpa.service';
-import { UserService } from 'src/app/shared/user/user.service';
+import { KorpaService } from 'src/app/shared/services/korpa/korpa.service';
+import { UserService } from 'src/app/shared/services/user/user.service';
 import { filter, Observable, take } from 'rxjs';
-import { ProductsService } from 'src/app/shared/products/products.service';
+import { ProductsService } from 'src/app/shared/services/products/products.service';
 
 
 

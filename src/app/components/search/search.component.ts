@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, Observable, take } from 'rxjs';
 import { IProductsPage } from 'src/app/models/products-page';
-import { FilterPageService } from 'src/app/shared/filterPage/filter-page.service';
-import { MasterService } from 'src/app/shared/master-service.service';
-import { ProductsService } from 'src/app/shared/products/products.service';
+import { FilterPageService } from 'src/app/shared/services/filterPage/filter-page.service';
+import { MasterService } from 'src/app/shared/services/master-service.service';
+import { ProductsService } from 'src/app/shared/services/products/products.service';
 import * as CryptoJS from 'crypto-js';  
 import { IUser } from 'src/app/models/user';
-import { UserService } from 'src/app/shared/user/user.service';
+import { UserService } from 'src/app/shared/services/user/user.service';
 import { SearchModelClass } from 'src/app/models/search-model';
 
 @Component({

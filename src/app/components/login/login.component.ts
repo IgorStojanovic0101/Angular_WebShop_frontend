@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MasterService } from 'src/app/shared/master-service.service';
+import { MasterService } from 'src/app/shared/services/master-service.service';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from 'src/app/shared/user/user.service';
+import { UserService } from 'src/app/shared/services/user/user.service';
 import { IUser, User } from 'src/app/models/user';
-import { KorpaService } from 'src/app/shared/korpa/korpa.service';
-import { HomeService } from 'src/app/shared/home/home.service';
+import { KorpaService } from 'src/app/shared/services/korpa/korpa.service';
+import { HomeService } from 'src/app/shared/services/home/home.service';
 
 @Component({
   selector: 'app-login',

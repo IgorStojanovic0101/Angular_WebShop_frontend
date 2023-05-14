@@ -3,9 +3,9 @@ import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { IHistory } from 'src/app/models/history';
-import { FilterPageService } from 'src/app/shared/filterPage/filter-page.service';
-import { HistoryService } from 'src/app/shared/history/history.service';
-import { ProductsService } from 'src/app/shared/products/products.service';
+import { FilterPageService } from 'src/app/shared/services/filterPage/filter-page.service';
+import { HistoryService } from 'src/app/shared/services/history/history.service';
+import { ProductsService } from 'src/app/shared/services/products/products.service';
 
 @Component({
   selector: 'app-order-history',

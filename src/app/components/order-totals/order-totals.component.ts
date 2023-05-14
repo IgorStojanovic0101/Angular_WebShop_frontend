@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IBasketTotals } from 'src/app/models/basket';
-import { KorpaService } from 'src/app/shared/korpa/korpa.service';
+import { KorpaService } from 'src/app/shared/services/korpa/korpa.service';
 
 @Component({
   selector: 'app-order-totals',

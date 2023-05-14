@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MasterService } from 'src/app/shared/master-service.service';
+import { MasterService } from 'src/app/shared/services/master-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user';
 import { SharedModel } from 'src/app/models/shared-model';

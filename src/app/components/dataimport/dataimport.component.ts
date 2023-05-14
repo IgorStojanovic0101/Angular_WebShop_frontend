@@ -5,7 +5,7 @@ import { Observable, Subscriber } from 'rxjs';
 import { ProductStatus } from 'src/app/models/enums/productStatus';
 import { ICategory, IDepartment } from 'src/app/models/navbar';
 import { IProductUpload } from 'src/app/models/product';
-import { DataimportService } from 'src/app/shared/dataimport/dataimport.service';
+import { DataimportService } from 'src/app/shared/services/dataimport/dataimport.service';
 
 @Component({
   selector: 'app-dataimport',

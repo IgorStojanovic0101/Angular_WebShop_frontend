@@ -3,9 +3,9 @@ import { BehaviorSubject, map } from 'rxjs';
 import { ICategory, IDepartment } from 'src/app/models/navbar';
 import { IProduct, IProductUpload } from 'src/app/models/product';
 import { SharedModel } from 'src/app/models/shared-model';
-import { MasterService } from '../master-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { ProductStatus } from 'src/app/models/enums/productStatus';
+import { MasterService } from '../master-service.service';
 
 @Injectable({
   providedIn: 'root'

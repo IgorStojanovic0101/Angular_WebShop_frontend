@@ -9,6 +9,9 @@ import { ICategory, IDepartment } from 'src/app/models/navbar';
 import { IProduct } from 'src/app/models/product';
 import { SearchModel, SearchModelClass } from 'src/app/models/search-model';
 import { MasterService } from '../master-service.service';
+import { IUser } from 'src/app/models/user';
+import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';  
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +51,7 @@ export class HomeService {
   row6Products$ = this.row6ProductsSource.asObservable();
 
 
-  constructor(private service: MasterService) { }
+  constructor(private service: MasterService,private router:Router) { }
 
 
   getHome(id:number)
@@ -202,4 +205,68 @@ export class HomeService {
   {
     return this.homeSource.value;
   }
+
+
+  CallDepartment(user: IUser, id:number)
+  {
+    //let userId = Number(localStorage.getItem('user_id')!);
+    let userId = user.UserPk;
+  
+    let serachModel:SearchModel = {departmentFk: id,departmentCount:1,categoryCount:0,categoryFk:0,userId:userId,categoryList:[]};
+    this.SetDepartmentML(serachModel);
+       //here we can see user form data in encrypted format in console
+    let nekID = encodeURIComponent(CryptoJS.AES.encrypt(id.toString(),"id").toString());
+  //encodeURIComponent
+  
+    this.router.navigate(['auth/home/product-group',nekID]);
+  
+  }
+  CallCategoryDepartment(user:IUser)
+{
+
+  let id = this.getCategoriesValues()!.at(0)?.DepartmentFk;
+
+  if(!user.isAdmin)
+  {
+    let userId = user.UserPk;
+    let serachModel:SearchModel = {departmentFk: id!,departmentCount:1,categoryCount:0,categoryFk:0,userId:userId,categoryList:[]};
+    this.SetDepartmentML(serachModel);
+ 
+  }
+  //let userId = Number(localStorage.getItem('user_id')!);
+      //here we can see user form data in encrypted format in console
+  let nekID = encodeURIComponent(CryptoJS.AES.encrypt(id!.toString(),"id").toString());
+//encodeURIComponent
+
+  this.router.navigate(['auth/home/product-group',nekID]);
+
+}
+
+CallCategory(user:IUser, id:number)
+{
+  //let userId = Number(localStorage.getItem('user_id')!);
+  if(!user.isAdmin)
+  {
+      let userId = user.UserPk;
+      let serachModel:SearchModel = {departmentFk: 0,departmentCount:0,categoryCount:1,categoryFk:id,userId:userId,categoryList:[]};
+       this.SetCategoryML(serachModel);
+  }
+
+ 
+
+     //here we can see user form data in encrypted format in console
+    let nekID = encodeURIComponent(CryptoJS.AES.encrypt(id.toString(),"id").toString());
+//encodeURIComponent 
+    this.router.navigate(['auth/home/product-one',nekID]);
+}
+
+openProduct(id:number)
+{
+  let nekID = encodeURIComponent(CryptoJS.AES.encrypt(id.toString(),"id").toString());
+  //encodeURIComponent
+  
+  this.router.navigate(['auth/home/product',nekID]);
+  
+}
+
 }

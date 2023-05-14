@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersComponent } from './components/users/users.component';
-import {MasterService} from './shared/master-service.service'
+import { MasterService } from 'src/app/shared/services/master-service.service';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import{HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -36,8 +36,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import { ProductComponent } from './components/product/product.component';
 import { InterceptorService } from './components/loader/interceptor.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { UserService } from './shared/user/user.service';
-import { KorpaService } from './shared/korpa/korpa.service';
+import { UserService } from './shared/services/user/user.service';
+import { KorpaService } from './shared/services/korpa/korpa.service';
 import { BasketComponent } from './components/basket/basket.component';
 import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
@@ -49,6 +49,12 @@ import { AdminComponent } from './components/admin/admin.component';
 import { DataimportComponent } from './components/dataimport/dataimport.component';
 import { ProductDepartmentsComponent } from './components/product-departments/product-departments.component';
 import { UpdateProductComponent } from './components/update-product/update-product.component';
+import { Row1Component } from './components/home/row1/row1.component';
+import { Row2Component } from './components/home/row2/row2.component';
+import { Row3Component } from './components/home/row3/row3.component';
+import { Row4Component } from './components/home/row4/row4.component';
+import { Row5Component } from './components/home/row5/row5.component';
+import { Row6Component } from './components/home/row6/row6.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +78,14 @@ import { UpdateProductComponent } from './components/update-product/update-produ
     AdminComponent,
     DataimportComponent,
     ProductDepartmentsComponent,
-    UpdateProductComponent
+    UpdateProductComponent,
+    Row1Component,
+    Row2Component,
+    Row3Component,
+    Row4Component,
+    Row5Component,
+    Row6Component,
+    
 
     
     
