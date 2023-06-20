@@ -7,6 +7,7 @@ import { Observable, filter, of, switchMap, take, tap } from 'rxjs';
 import { IHomeRow4 } from 'src/app/models/home-row4';
 import { IUser } from 'src/app/models/user';
 import { HomeService } from 'src/app/shared/services/home/home.service';
+import { UserService } from 'src/app/shared/services/user/user.service';
 
 @Component({
   selector: 'app-row4',
@@ -16,19 +17,30 @@ import { HomeService } from 'src/app/shared/services/home/home.service';
 export class Row4Component implements OnInit {
 
   row4Products$!:Observable<IHomeRow4 | null>;
-  @Input() user!:IUser;
+
+   user!:IUser;
 
   @ViewChild('carousel') carousel!: NgbCarousel;
  
   @ViewChild('scroll', {read: DragScrollComponent}) ds!: DragScrollComponent;
 
-  constructor(private homeService: HomeService,private router:Router) { }
+  constructor(private userService: UserService,private homeService: HomeService,private router:Router) { }
 
   ngOnInit(): void {
 
+    
+    this.userService.user$.pipe(
+      filter(x => !!x),
+      take(1),
+      switchMap(response => {
+        if (!response) {
+          return of(null);
+        }
+    this.user = response;
+    
     let userId = this.user.isAdmin? Number(localStorage.getItem('See_as_user_id')!) : Number(localStorage.getItem('user_id')!);
    
-    this.homeService.row2Items$.pipe(
+    return this.homeService.row2Items$.pipe(
       filter(x => !!x),
       take(1),
       switchMap(response => {
@@ -42,9 +54,13 @@ export class Row4Component implements OnInit {
           tap(() => {
             this.row4Products$ = this.homeService.productsForTopCategory$;
           })
-        );
-      })
-    ).subscribe();
+          );
+        })
+      );
+    })
+  ).subscribe();
+
+
   }
 
 

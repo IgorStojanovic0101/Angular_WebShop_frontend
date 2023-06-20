@@ -78,6 +78,10 @@ export class HomeComponent implements OnInit,OnDestroy {
 
     this.user$ = this.userService.user$;
 
+    
+   // console.log("Category source" + this.homeService.categorySource.getValue());
+
+
   }
   
   ngOnDestroy(): void {

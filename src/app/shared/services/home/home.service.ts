@@ -26,7 +26,7 @@ export class HomeService {
   departments$ = this.departmentSource.asObservable();
 
   
-  private categorySource = new BehaviorSubject<ICategory[] | null >(null);
+  categorySource = new BehaviorSubject<ICategory[] | null >(null);
   categories$ = this.categorySource.asObservable();
 
   private row1Products_1Source = new BehaviorSubject<IProduct[] | null >(null);

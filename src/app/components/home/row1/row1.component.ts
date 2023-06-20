@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbCarousel, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, Observable, filter, forkJoin, map, take, tap } from 'rxjs';
+import { BehaviorSubject, Observable, filter, forkJoin, map, of, switchMap, take, tap } from 'rxjs';
 import { ICategory, IDepartment } from 'src/app/models/navbar';
 import { IProduct } from 'src/app/models/product';
 import { SearchModel } from 'src/app/models/search-model';
@@ -26,8 +26,7 @@ export class Row1Component implements OnInit {
   row1Products_2$!:Observable<IProduct[] | null>;
 
 
-
-  @Input() user!:IUser;
+  user!:IUser;
 
   @ViewChild('carousel') carousel!: NgbCarousel;
 
@@ -43,7 +42,7 @@ export class Row1Component implements OnInit {
 
 
   ];
-  constructor(private homeService: HomeService,private router:Router,private config: NgbCarouselConfig,private authome: AuthomeService) {
+  constructor(private userService: UserService, private homeService: HomeService,private router:Router,private config: NgbCarouselConfig,private authome: AuthomeService) {
 
     this.config.keyboard = true;
     this.config.pauseOnHover = true;
@@ -69,10 +68,10 @@ export class Row1Component implements OnInit {
 
   
 
-    let userId = this.user.isAdmin? Number(localStorage.getItem('See_as_user_id')!) : Number(localStorage.getItem('user_id')!);
+    //let userId = this.user.isAdmin? Number(localStorage.getItem('See_as_user_id')!) : Number(localStorage.getItem('user_id')!);
    
   
-      if (userId) {
+     /* if (userId) {
         forkJoin([
           this.homeService.getDepartments(userId).pipe(tap(() => {
             this.departments$ = this.homeService.departments$;
@@ -87,7 +86,53 @@ export class Row1Component implements OnInit {
             this.row1Products_2$ = this.homeService.row1Products_2$;
           }))
         ]).subscribe();
-      }
+      }*/
+      
+
+      
+      this.userService.user$.pipe(
+        filter(x => !!x),
+        take(1),
+        switchMap(response => {
+          if (!response) {
+            return of(null);
+          }
+          this.user = response;
+          const userId = response.isAdmin
+            ? Number(localStorage.getItem('See_as_user_id')!)
+            : Number(localStorage.getItem('user_id')!);
+      
+          if (userId) {
+            return forkJoin([
+              this.homeService.getDepartments(response.UserPk).pipe(
+                tap(() => {
+                  this.departments$ = this.homeService.departments$;
+                })
+              ),
+              this.homeService.getCategories(response.UserPk).pipe(
+                tap(() => {
+                  this.categories$ = this.homeService.categories$;
+                })
+              ),
+              this.homeService.GetRow1Products_1(response.UserPk).pipe(
+                tap(() => {
+                  this.row1Products_1$ = this.homeService.row1Products_1$;
+                })
+              ),
+              this.homeService.GetRow1Products_2(response.UserPk).pipe(
+                tap(() => {
+                  this.row1Products_2$ = this.homeService.row1Products_2$;
+                })
+              )
+            ]);
+
+          } 
+          
+          else {
+            return of(null);
+          }
+        })
+      ).subscribe();
     
   
 

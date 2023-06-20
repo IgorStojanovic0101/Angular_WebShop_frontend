@@ -9,7 +9,7 @@ import { MasterService } from '../master-service.service';
 export class UserService {
 
 
-  public userSource = new BehaviorSubject<IUser | null >(null);
+  userSource = new BehaviorSubject<IUser | null >(null);
   user$ = this.userSource.asObservable();
 
   public userSeeAss_Source =  new BehaviorSubject<IUser | null >(null);

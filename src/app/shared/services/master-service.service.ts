@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { forkJoin, Observable, throwError } from 'rxjs';
 import { IBasket } from 'src/app/models/basket';
 import { IUser } from 'src/app/models/user';
@@ -20,13 +20,9 @@ import { IProduct, IProductUpload } from 'src/app/models/product';
 })
 export class MasterService {
 
+  constructor(private http: HttpClient) { }
 
-// works!
-
-  //val se koristi kao treba da saljem celu klasu kao argument, a ako je samo neki parametar kao id,name, onda mora da se navede..
-  
-  constructor(private http:HttpClient) { }
-
+  // ...
   getUserList():Observable<IUser[]>{
     return this.http.get<IUser[]>(ServiceUrls.User.GetUsers);
   }
@@ -36,13 +32,10 @@ export class MasterService {
   SetUpUser(val:any):Observable<any>{
     return this.http.post<any>(ServiceUrls.User.SetUp,val);
   }
-  GetUserById(val:number):Observable<IUser>
-  {
-    return this.http.post<IUser>(ServiceUrls.User.GetUserById+`/?userId=${val}`,{});
-
+  GetUserById(val: number): Observable<IUser> {
+    const params = new HttpParams().set('userId', val.toString());
+    return this.http.post<IUser>(ServiceUrls.User.GetUserById, null, { params });
   }
- 
-
   GetProduct(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>(ServiceUrls.Product.GetProducts);
   }
@@ -58,128 +51,139 @@ export class MasterService {
   GetProductsByDepartmentFk(model: SearchModelClass): Observable<IProductsPage> {
     return this.http.post<IProductsPage>(ServiceUrls.Product.GetProductsByDepartmentFk, model);
   }
-  
+
   GetProductbycode(val: number): Observable<IProduct[]> {
-    return this.http.post<IProduct[]>(ServiceUrls.Product.GetProductbycode + `/?id=${val}`, {});
+    const params = new HttpParams().set('id', val.toString());
+    return this.http.post<IProduct[]>(ServiceUrls.Product.GetProductbycode, null, { params });
   }
-  
+
   GetProductbyId(val: number): Observable<IProduct> {
-    return this.http.post<IProduct>(ServiceUrls.Product.GetProductbyId + `/?id=${val}`, {});
+    const params = new HttpParams().set('id', val.toString());
+    return this.http.post<IProduct>(ServiceUrls.Product.GetProductbyId, null, { params });
   }
-  
   GetProductbyCategory(val: SearchModelClass): Observable<IProductsPage> {
     return this.http.post<IProductsPage>(ServiceUrls.Product.GetProductsByCategoryFk, val);
   }
-  
+
   GetProductListbyCategory(val: number): Observable<IProduct[]> {
-    return this.http.post<IProduct[]>(ServiceUrls.Product.GetProductListByCategoryFk + `/?category_id=${val}`, {});
+    const params = new HttpParams().set('category_id', val.toString());
+    return this.http.post<IProduct[]>(ServiceUrls.Product.GetProductListByCategoryFk, null, { params });
   }
-  
   FilterProducts(filter: Filter): Observable<IProductsPage> {
     return this.http.post<IProductsPage>(ServiceUrls.Product.FilterProducts, filter);
   }
   
+
   FilterHistoryProducts(val: number, filter: Filter): Observable<IHistory> {
-    return this.http.post<IHistory>(ServiceUrls.OrderHistory.FilterHistoryProducts + `/?user_id=${val}`, filter);
+    const params = new HttpParams().set('user_id', val.toString());
+    return this.http.post<IHistory>(ServiceUrls.OrderHistory.FilterHistoryProducts, filter, { params });
   }
-  
+
   SetProduct(product: IProductUpload): Observable<SharedModel> {
     return this.http.post<SharedModel>(ServiceUrls.Product.SetProduct, product);
   }
-
-
-
-  ////////////////////////////////////////////////////////
-
-
   GetBasket(val: any): Observable<IBasket> {
-    return this.http.post<IBasket>(ServiceUrls.Basket.GetBacket + `/?user_id=${val}`, {});
+    const params = new HttpParams().set('user_id', val.toString());
+    return this.http.post<IBasket>(ServiceUrls.Basket.GetBacket, null, { params });
   }
-  
+
   GetBasketById(val: any): Observable<IBasket> {
-    return this.http.post<IBasket>(ServiceUrls.Basket.GetBacketById + `/?pk=${val}`, {});
+    const params = new HttpParams().set('pk', val.toString());
+    return this.http.post<IBasket>(ServiceUrls.Basket.GetBacketById, null, { params });
   }
-  
   SetBaset(basket: IBasket): Observable<IBasket> {
     return this.http.post<IBasket>(ServiceUrls.Basket.SetBacket, basket);
   }
   
 
-  ////////////////////////////////////////////////////////////////////////
   GetHistory(val: any): Observable<IHistory> {
-    return this.http.post<IHistory>(ServiceUrls.OrderHistory.GetHistory + `/?user_id=${val}`, {});
+    const params = new HttpParams().set('user_id', val.toString());
+    return this.http.post<IHistory>(ServiceUrls.OrderHistory.GetHistory, null, { params });
+
   }
-  
   SetHistory(history: IHistory): Observable<IHistory> {
     return this.http.post<IHistory>(ServiceUrls.OrderHistory.SetHistory, history);
   }
   
+
   GetNavBar(val: any): Observable<INavBar> {
-    return this.http.post<INavBar>(ServiceUrls.Department.GetNavBar + `/?user_id=${val}`, {});
+    const params = new HttpParams().set('user_id', val.toString());
+    return this.http.post<INavBar>(ServiceUrls.Department.GetNavBar, null, { params });
   }
   
+ 
   GetHome(val: any): Observable<IHome> {
-    return this.http.post<IHome>(ServiceUrls.Home.GetHome + `/?user_id=${val}`, {});
-  }
-  
-  GetHomeDepartments(val: any): Observable<IDepartment[]> {
-    return this.http.post<IDepartment[]>(ServiceUrls.Home.GetDepartments + `/?user_id=${val}`, {});
-  }
-  
-  GetHomeCategories(val: any): Observable<ICategory[]> {
-    return this.http.post<ICategory[]>(ServiceUrls.Home.GetCategories + `/?user_id=${val}`, {});
-  }
-  
-  GetRow1Products_1(val: any): Observable<IProduct[]> {
-    return this.http.post<IProduct[]>(ServiceUrls.Home.GetRow1Products_1 + `/?user_id=${val}`, {});
-  }
-  
-  GetRow1Products_2(val: any): Observable<IProduct[]> {
-    return this.http.post<IProduct[]>(ServiceUrls.Home.GetRow1Products_2 + `/?user_id=${val}`, {});
-  }
-  
-  GetRow2(val: any): Observable<IHomeRow2> {
-    return this.http.post<IHomeRow2>(ServiceUrls.Home.GetRow2 + `/?user_id=${val}`, {});
-  }
-  
-  GetRow3(val: any, department_id: number): Observable<IProduct[]> {
-    return this.http.post<IProduct[]>(ServiceUrls.Home.GetRow3 + `/?user_id=${val}&&department_id=${department_id}`, {});
-  }
-  
-  GetProductsForTopCategory(categoryId: number, user_id: number): Observable<IHomeRow4> {
-    return this.http.post<IHomeRow4>(ServiceUrls.Home.GetProductsForTopCategory + `/?user_id=${user_id}&&category_id=${categoryId}`, {});
-  }
-  
-  GetRow5(val: any): Observable<IHomeRow5> {
-    return this.http.post<IHomeRow5>(ServiceUrls.Home.GetRow5 + `/?user_id=${val}`, {});
-  }
-  
-  GetRow6(model: SearchModelClass): Observable<IProduct[]> {
+    const params = new HttpParams().set('user_id', val.toString());
+    return this.http.post<IHome>(ServiceUrls.Home.GetHome, null, { params });
+    }
+    
+    GetHomeDepartments(val: any): Observable<IDepartment[]> {
+    const params = new HttpParams().set('user_id', val.toString());
+    return this.http.post<IDepartment[]>(ServiceUrls.Home.GetDepartments, null, { params });
+    }
+    
+    GetHomeCategories(val: any): Observable<ICategory[]> {
+    const params = new HttpParams().set('user_id', val.toString());
+    return this.http.post<ICategory[]>(ServiceUrls.Home.GetCategories, null, { params });
+    }
+    
+    GetRow1Products_1(val: any): Observable<IProduct[]> 
+    {
+          const params = new HttpParams().set('user_id', val.toString());
+          return this.http.post<IProduct[]>(ServiceUrls.Home.GetRow1Products_1, null, { params });
+    }
+    
+    GetRow1Products_2(val: any): Observable<IProduct[]> {
+    const params = new HttpParams().set('user_id', val.toString());
+    return this.http.post<IProduct[]>(ServiceUrls.Home.GetRow1Products_2, null, { params });
+    }
+    
+    GetRow2(val: any): Observable<IHomeRow2> {
+    const params = new HttpParams().set('user_id', val.toString());
+    return this.http.post<IHomeRow2>(ServiceUrls.Home.GetRow2, null, { params });
+    }
+    
+    GetRow3(val: any, department_id: number): Observable<IProduct[]> {
+    const params = new HttpParams().set('user_id', val.toString()).set('department_id', department_id.toString());
+    return this.http.post<IProduct[]>(ServiceUrls.Home.GetRow3, null, { params });
+    }
+    
+    GetProductsForTopCategory(categoryId: number, user_id: number): Observable<IHomeRow4> {
+    const params = new HttpParams().set('user_id', user_id.toString()).set('category_id', categoryId.toString());
+    return this.http.post<IHomeRow4>(ServiceUrls.Home.GetProductsForTopCategory, null, { params });
+    }
+    
+    GetRow5(val: any): Observable<IHomeRow5> {
+    const params = new HttpParams().set('user_id', val.toString());
+    return this.http.post<IHomeRow5>(ServiceUrls.Home.GetRow5, null, { params });
+    }
+    
+    GetRow6(model: SearchModelClass): Observable<IProduct[]> {
     return this.http.post<IProduct[]>(ServiceUrls.Home.GetRow6, model);
-  }
-  
-  SetDepartmentML(model: SearchModel): Observable<SharedModel> {
+    }
+    
+    SetDepartmentML(model: SearchModel): Observable<SharedModel> {
     return this.http.post<SharedModel>(ServiceUrls.Home.SetDepartmentML, model);
-  }
-  
-  SetCategoryML(model: SearchModel): Observable<SharedModel> {
+    }
+    
+    SetCategoryML(model: SearchModel): Observable<SharedModel> {
     return this.http.post<SharedModel>(ServiceUrls.Home.SetCategoryML, model);
-  }
-
-  //Admin
-
-  
-  GetDepartments(): Observable<IDepartment[]> {
+    }
+    
+    //Admin
+    
+    GetDepartments(): Observable<IDepartment[]> {
     return this.http.get<IDepartment[]>(ServiceUrls.Department.GetDepartments);
-  }
-  
-  GetCategories(department_id: number): Observable<ICategory[]> {
-    return this.http.post<ICategory[]>(ServiceUrls.Department.GetCategories + `/?department_id=${department_id}`, {});
-  }
-  
-  GetAllCategories(): Observable<ICategory[]> {
+    }
+    
+    GetCategories(department_id: number): Observable<ICategory[]> {
+    const params = new HttpParams().set('department_id', department_id.toString());
+    return this.http.post<ICategory[]>(ServiceUrls.Department.GetCategories, null, { params });
+    }
+    
+    GetAllCategories(): Observable<ICategory[]> {
     return this.http.get<ICategory[]>(ServiceUrls.Department.GetAllCategories);
-  }
+    }
   
   SetDepartment(department: IDepartment): Observable<SharedModel> {
     return this.http.post<SharedModel>(ServiceUrls.Department.SetDepartment, department);
