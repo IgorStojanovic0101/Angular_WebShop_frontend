@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UsersComponent } from './components/users/users.component';
 import { ProductsComponent } from './components/group-products/group-products.component';
 import { SingleProductComponent } from './components/single-product/single-product.component';
 import { HomeComponent } from './components/home/home.component';
@@ -18,7 +17,6 @@ import { DataimportComponent } from './components/dataimport/dataimport.componen
 import { ProductDepartmentsComponent } from './components/product-departments/product-departments.component';
 import { UpdateProductComponent } from './components/update-product/update-product.component';
 const routes: Routes = [
-  {path:'users',component:UsersComponent},
   {path:'items',component:ProductsComponent},
  // {path:'auth/home/product-group/:id',component:ProductsComponent},
  // {path:'auth/home/product-one/:id',component:SingleProductComponent},
