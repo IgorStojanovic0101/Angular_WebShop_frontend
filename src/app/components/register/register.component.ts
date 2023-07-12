@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
             localStorage.setItem('user_id',String(this.returnModel.RecordPk));
        
             this.toastr.success('Registration successful');
-            localStorage.setItem("isLoggedIn","true");
+            localStorage.setItem("isLoggedIn","true"); // ovde moze da se proveri token..
             this.router.navigate(['auth/home']);
           }
          if(this.returnModel.Status === CreateStatus.validation)

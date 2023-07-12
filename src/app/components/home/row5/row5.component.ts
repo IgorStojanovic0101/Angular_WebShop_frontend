@@ -22,25 +22,21 @@ export class Row5Component implements OnInit {
 
 
   this.userService.user$.pipe(
-    filter(x => !!x),
-    take(1),
     switchMap(response => {
       if (!response) {
         return of(null);
       }
 
-            let userId = response.isAdmin? Number(localStorage.getItem('See_as_user_id')!) : Number(localStorage.getItem('user_id')!);
+        let userId = response.isAdmin? Number(localStorage.getItem('See_as_user_id')!) : Number(localStorage.getItem('user_id')!);
+    
+        if (userId) {
+        return forkJoin([
+          this.homeService.GetRow5(userId).pipe(tap(() => {
+            this.row5Items$ = this.homeService.row5Items$;
+          }))
         
-            if (userId) {
-            return forkJoin([
-              this.homeService.GetRow5(userId).pipe(tap(() => {
-                this.row5Items$ = this.homeService.row5Items$;
-              }))
-            
-            ])
-          }
-
-
+        ])
+      }
       else {
         return of(null);
       }

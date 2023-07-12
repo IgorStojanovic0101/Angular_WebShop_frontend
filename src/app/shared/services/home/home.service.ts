@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { IHistory } from 'src/app/models/history';
 import { IHome } from 'src/app/models/home';
 import { IHomeRow2 } from 'src/app/models/home-row2';
@@ -12,6 +12,7 @@ import { MasterService } from '../master-service.service';
 import { IUser } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import * as CryptoJS from 'crypto-js';  
+import { SharedModel } from 'src/app/models/shared-model';
 
 @Injectable({
   providedIn: 'root'
@@ -172,20 +173,13 @@ export class HomeService {
   SetDepartmentML(val:SearchModel)
   {
    
-   return this.service.SetDepartmentML(val).subscribe((response)=>
-   {
-      console.log("SetDepartmentML",response);
-   }
-   );
+   return this.service.SetDepartmentML(val);
+   
   }
-  SetCategoryML(val:SearchModel)
+  SetCategoryML(val:SearchModel) : Observable<SharedModel>
   {
    
-   return this.service.SetCategoryML(val).subscribe((response)=>
-   {
-      console.log("SetCategoryML",response);
-   }
-   );
+   return this.service.SetCategoryML(val);
   }
 
   
@@ -194,12 +188,26 @@ export class HomeService {
  DestroyHome()
  {
   this.homeSource.next(null);
+ // this.homeSource.complete();
+
   this.departmentSource.next(null);
+  //this.departmentSource.complete();
+
   this.categorySource.next(null);
+ // this.categorySource.complete();
+
   this.row1Products_1Source.next(null);
+//  this.row1Products_1Source.complete();
+
   this.row1Products_2Source.next(null);
+  //this.row1Products_2Source.complete();
+
   this.row2Items_Source.next(null);
+  //this.row2Items_Source.complete();
+
   this.row3ProductsSource.next(null);
+ // this.row3ProductsSource.complete();
+
  }
   getCurrentHomeValue()
   {

@@ -67,7 +67,6 @@ export class HomeComponent implements OnInit,OnDestroy {
 
  
 
-  user$!:Observable<IUser | null>;
 
   constructor(private homeService: HomeService,private userService:UserService) { 
   }
@@ -75,13 +74,6 @@ export class HomeComponent implements OnInit,OnDestroy {
 
 
   ngOnInit(): void {
-
-    this.user$ = this.userService.user$;
-
-    
-   // console.log("Category source" + this.homeService.categorySource.getValue());
-
-
   }
   
   ngOnDestroy(): void {

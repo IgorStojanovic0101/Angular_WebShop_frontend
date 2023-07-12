@@ -17,7 +17,9 @@ import { DataimportComponent } from './components/dataimport/dataimport.componen
 import { ProductDepartmentsComponent } from './components/product-departments/product-departments.component';
 import { UpdateProductComponent } from './components/update-product/update-product.component';
 const routes: Routes = [
-  {path:'items',component:ProductsComponent},
+
+
+  
  // {path:'auth/home/product-group/:id',component:ProductsComponent},
  // {path:'auth/home/product-one/:id',component:SingleProductComponent},
   {path:'auth',component:AuthComponent,canActivate:[AuthGuard],

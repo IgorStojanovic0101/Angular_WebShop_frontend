@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { filter, Observable, take } from 'rxjs';
+import { combineLatest, filter, Observable, of, switchMap, take } from 'rxjs';
 import { IMenu } from 'src/app/models/i-menu';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LoaderService } from '../loader/loader.service';
@@ -71,51 +71,32 @@ export class AuthComponent implements OnInit,AfterViewInit {
    }
 
 
-  ngOnInit(): void {
+   ngOnInit(): void {
     this.SearchForm = this.fb.group({
       search: [''],
-           // email:['',Validators.compose([Validators.required,Validators.email])]
+      // email:['',Validators.compose([Validators.required,Validators.email])]
+    });
   
-      });
-      const userId = localStorage.getItem('user_id');
-      this.authome.SetUser(Number(userId));
-
-      
-      this.korpa.getBasket(Number(userId)).subscribe(()=>{
-     //   console.log('initialized basket');
-   
-       // console.log("Home",this.userService.getUser());
-       });
-       this.userService.getUser(Number(userId)).subscribe(()=>{
-      
-       });
-   
-      
-
-       this.NavBarService.getNavBar(Number(userId)).subscribe(()=> {
-        //console.log('initialized nav bar');
-       })
-
-       this.DataImportService.GetDepartments().subscribe(()=>{
-
-       });
-       this.departments$ = this.DataImportService.departments$;
-
-       
-       this.DataImportService.GetAllCategories().subscribe(()=>{
-
-       });
-       
-
-     
-     this.userSeeAss$ = this.userService.userSeeAss$;
-
-       this.categories$ = this.DataImportService.categories$;
-      this.basket$ = this.korpa.basket$;
-      this.user$ = this.userService.user$;
-      this.navBar$ = this.NavBarService.navBar$;
-
-       
+    const userId = Number(localStorage.getItem('user_id'));
+    this.authome.SetUser(userId);
+  
+    // Combining multiple observables into a single stream (observabke)
+    combineLatest([
+      this.korpa.getBasket(userId),
+      this.userService.getUser(userId),
+      this.NavBarService.getNavBar(userId),
+      this.DataImportService.GetDepartments(),
+      this.DataImportService.GetAllCategories()
+    ]).subscribe(() => {
+      // Initialization complete
+    });
+  
+    this.departments$ = this.DataImportService.departments$;
+    this.categories$ = this.DataImportService.categories$;
+    this.basket$ = this.korpa.basket$;
+    this.user$ = this.userService.user$;
+    this.navBar$ = this.NavBarService.navBar$;
+    this.userSeeAss$ = this.userService.userSeeAss$;
   }
   
   ngAfterViewInit(): void {
@@ -203,24 +184,24 @@ export class AuthComponent implements OnInit,AfterViewInit {
     this.router.navigate(['auth/home/order-history']);
 
   }
-  CallDepartment(id:number)
+CallDepartment(id:number)
 {
 
-  this.user$.pipe(filter(x => !!x),take(1))
-    .subscribe((response)=>
+  this.user$.pipe(
+    switchMap(response =>
     {
-    if(response)
-    {
+      if (!response) {
+        return of(null);
+      }
       if(!response.isAdmin)
       { 
-
         let userId = Number(localStorage.getItem('user_id')!);
-
         let serachModel:SearchModel = {departmentFk: id,departmentCount:1,categoryCount:0,categoryFk:0,userId:userId,categoryList:[]};
-        this.homeService.SetDepartmentML(serachModel);
+        return this.homeService.SetDepartmentML(serachModel);
       }
-    }
-    });
+      return of(null); 
+
+    })).subscribe();
 
  
 
@@ -230,30 +211,35 @@ export class AuthComponent implements OnInit,AfterViewInit {
 
   this.router.navigate(['auth/home/product-group',nekID]);
 
-}
+  }
 
 CallCategory(id:number)
 {
 
-  this.user$.pipe(filter(x => !!x),take(1))
-    .subscribe((response)=>
-    {
-    if(response)
-    {
-      if(!response.isAdmin)
-      {  
-        
-      let userId = Number(localStorage.getItem('user_id')!);
-       let serachModel:SearchModel = {departmentFk: 0,departmentCount:0,categoryCount:1,categoryFk:id,userId:userId,categoryList:[]};
-       this.homeService.SetCategoryML(serachModel);
+  this.user$.pipe(
+    switchMap(response => {
+      if (!response) {
+        return of(null);
       }
+      if (!response.isAdmin) {
+        let userId = Number(localStorage.getItem('user_id'));
 
-    }});
+        if (!userId) {
+          return of(null);
+        }
+        let serachModel: SearchModel = {departmentFk: 0, departmentCount: 0, categoryCount: 1, categoryFk: id, userId: userId, categoryList: []};
+        return this.homeService.SetCategoryML(serachModel)
+      } 
+      return of(null); 
+    })
+    ).subscribe();
+  
 
-      //here we can see user form data in encrypted format in console
+
+
   
   
-     let nekID = encodeURIComponent(CryptoJS.AES.encrypt(id.toString(),"id").toString());
+   let nekID = encodeURIComponent(CryptoJS.AES.encrypt(id.toString(),"id").toString());
 //encodeURIComponent 
     this.router.navigate(['auth/home/product-one',nekID]);
 }

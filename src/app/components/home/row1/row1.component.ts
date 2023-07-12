@@ -66,33 +66,9 @@ export class Row1Component implements OnInit {
    ngOnInit(): void {
     
 
-  
-
-    //let userId = this.user.isAdmin? Number(localStorage.getItem('See_as_user_id')!) : Number(localStorage.getItem('user_id')!);
-   
-  
-     /* if (userId) {
-        forkJoin([
-          this.homeService.getDepartments(userId).pipe(tap(() => {
-            this.departments$ = this.homeService.departments$;
-          })),
-          this.homeService.getCategories(userId).pipe(tap(() => {
-            this.categories$ = this.homeService.categories$;
-          })),
-          this.homeService.GetRow1Products_1(userId).pipe(tap(() => {
-            this.row1Products_1$ = this.homeService.row1Products_1$;
-          })),
-          this.homeService.GetRow1Products_2(userId).pipe(tap(() => {
-            this.row1Products_2$ = this.homeService.row1Products_2$;
-          }))
-        ]).subscribe();
-      }*/
-      
 
       
       this.userService.user$.pipe(
-        filter(x => !!x),
-        take(1),
         switchMap(response => {
           if (!response) {
             return of(null);
@@ -126,8 +102,7 @@ export class Row1Component implements OnInit {
               )
             ]);
 
-          } 
-          
+          }  
           else {
             return of(null);
           }

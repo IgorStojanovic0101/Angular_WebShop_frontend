@@ -23,8 +23,7 @@ export class Row3Component implements OnInit {
 
 
     this.userService.user$.pipe(
-      filter(x => !!x),
-      take(1),
+    
       switchMap(response => {
         if (!response) {
           return of(null);
@@ -32,9 +31,7 @@ export class Row3Component implements OnInit {
         this.user = response;
         let userId = this.user.isAdmin ? Number(localStorage.getItem('See_as_user_id')!) : Number(localStorage.getItem('user_id')!);
     
-        return this.homeService.row2Items$.pipe(
-          filter(x => !!x),
-          take(1),
+        return this.homeService.row2Items$.pipe( 
           switchMap(response => {
             if (!response) {
               return of(null);

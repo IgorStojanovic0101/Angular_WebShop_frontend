@@ -29,29 +29,28 @@ export class Row6Component implements OnInit {
 
 
     this.userService.user$.pipe(
-      filter(x => !!x),
-      take(1),
+     
       switchMap(response => {
         if (!response) {
           return of(null);
         }
         this.user = response;
-    let userId = response.isAdmin? Number(localStorage.getItem('See_as_user_id')!) : Number(localStorage.getItem('user_id')!);
+        let userId = response.isAdmin? Number(localStorage.getItem('See_as_user_id')!) : Number(localStorage.getItem('user_id')!);
 
 
-    if (userId) {
-      let serachModel:SearchModelClass = new SearchModelClass(userId);
-    return forkJoin([
-      this.homeService.GetRow6(serachModel).pipe(tap(() => {
-        this.row6Products$ = this.homeService.row6Products$;
-      }))
-    
-    ]);
-    }
+        if (userId) {
+          let serachModel:SearchModelClass = new SearchModelClass(userId);
+        return forkJoin([
+          this.homeService.GetRow6(serachModel).pipe(tap(() => {
+            this.row6Products$ = this.homeService.row6Products$;
+          }))
+        
+        ]);
+        }
 
-      else {
-        return of(null);
-      }
+        else {
+          return of(null);
+        }
     })
     ).subscribe();
   }

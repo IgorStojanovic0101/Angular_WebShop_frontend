@@ -28,15 +28,11 @@ export class Row2Component implements OnInit {
    
      
     this.userService.user$.pipe(
-      filter(x => !!x),
-      take(1),
       switchMap(response => {
         if (!response) {
           return of(null);
         }
-        
         let userId = response.isAdmin ? Number(localStorage.getItem('See_as_user_id')!) : Number(localStorage.getItem('user_id')!);
-    
         if (userId) {
           return forkJoin([
             this.homeService.GetRow2(userId).pipe(
@@ -46,8 +42,6 @@ export class Row2Component implements OnInit {
             )
           ]);
         }
-
-        
        else {
           return of(null);
         }

@@ -64,6 +64,9 @@ import { AdminModule } from './modules/admin/admin.module';
     NgxSpinnerModule,   
     NgbDropdownModule,
 
+
+    
+ //My modules
     HomeModule, 
     MaterialModule,
     AuthModule,

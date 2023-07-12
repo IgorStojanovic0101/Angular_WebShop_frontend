@@ -30,35 +30,32 @@ export class Row4Component implements OnInit {
 
     
     this.userService.user$.pipe(
-      filter(x => !!x),
-      take(1),
+     
       switchMap(response => {
         if (!response) {
           return of(null);
         }
-    this.user = response;
-    
-    let userId = this.user.isAdmin? Number(localStorage.getItem('See_as_user_id')!) : Number(localStorage.getItem('user_id')!);
-   
-    return this.homeService.row2Items$.pipe(
-      filter(x => !!x),
-      take(1),
-      switchMap(response => {
-        if (!response) {
-          return of(null);
-        }
-        if (!userId) {
-          return of(null);
-        }
-        return  this.homeService.GetProductsForTopCategory(response.TopCategory.RecordPk,userId).pipe(
-          tap(() => {
-            this.row4Products$ = this.homeService.productsForTopCategory$;
-          })
-          );
+          this.user = response;
+          
+          let userId = this.user.isAdmin? Number(localStorage.getItem('See_as_user_id')!) : Number(localStorage.getItem('user_id')!);
+        
+          return this.homeService.row2Items$.pipe(   
+            switchMap(response => {
+              if (!response) {
+                return of(null);
+              }
+              if (!userId) {
+                return of(null);
+              }
+              return  this.homeService.GetProductsForTopCategory(response.TopCategory.RecordPk,userId).pipe(
+                tap(() => {
+                  this.row4Products$ = this.homeService.productsForTopCategory$;
+                })
+                );
+              })
+            );
         })
-      );
-    })
-  ).subscribe();
+    ).subscribe();
 
 
   }
